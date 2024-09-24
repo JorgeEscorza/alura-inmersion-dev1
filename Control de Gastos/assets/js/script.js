@@ -35,7 +35,10 @@ function actualizarListaGastos(){
         const descripcion = listaDescripciones[posicion];
         htmlLista += `<li>${elemento} - USD ${Number(valorGasto).toFixed(2)}
                         <br>${descripcion}<br>
+                        <div>
+                        <button onclick="modificarGasto(${posicion});">Modificar</button>
                         <button onclick="eliminarGasto(${posicion});">Eliminar</button>
+                        </div>
                     </li>`
 
         //Calculamos el total de gastos
@@ -77,6 +80,27 @@ function autoResize(textarea){
     
 }
 
+// Para asociar el textarea con la función Resize
 const textareaField = document.getElementById("descripcion");
 textareaField.addEventListener("input", () => autoResize(textareaField));
 autoResize(textareaField);
+
+function modificarGasto(posicion){
+
+    botonModoActualizar = document.getElementById("botonFormulario");
+    botonModoActualizar.innerHTML = "Actualizar";
+
+    botonModoActualizar.onclick = function(){
+        
+        let nombreGasto = document.getElementById("nombreGasto").value;
+        let valorGasto = document.getElementById("valorGasto").value;
+        let descripcion = document.getElementById("descripcion").value;
+
+        listaNombresGastos[posicion] = nombreGasto;
+        listaValorGastos[posicion] = valorGasto;
+        listaDescripciones[posicion] = descripcion;
+
+        actualizarListaGastos();
+    }
+
+}
