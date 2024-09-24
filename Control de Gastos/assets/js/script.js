@@ -6,18 +6,18 @@ function clickBoton(){
 
     let nombreGasto = document.getElementById("nombreGasto").value;
     let valorGasto = document.getElementById("valorGasto").value;
+    const total = document.getElementById("totalGastos");
+    const contenedorTotal = document.getElementById("contenedorTotal");
 
-    console.log(nombreGasto);
-    console.log(valorGasto);
+    if (Number(total.innerText) + Number(valorGasto) < 150){
 
-    listaNombresGastos.push(nombreGasto);
-    listaValorGastos.push(valorGasto);
-
-    console.log(listaNombresGastos);
-    console.log(listaValorGastos);
-
-    //alert("Click de usuario");
-    actualizarListaGastos();
+        listaNombresGastos.push(nombreGasto);
+        listaValorGastos.push(valorGasto);
+        actualizarListaGastos();
+    }else{
+        contenedorTotal.innerHTML += "<br> Límite de gastos alcanzado";
+        limpiar();
+    }
 }
 
 function actualizarListaGastos(){
@@ -42,7 +42,8 @@ function actualizarListaGastos(){
     console.log(totalGastos);
 
     listaElementos.innerHTML = htmlLista;
-    totalElementos.innerHTML = totalGastos.toFixed(2); //Cantidad de decimales que queremos que aparezcan
+    contenedorTotal.innerHTML = `Total Mensual: USD $<span id="totalGastos">${totalGastos.toFixed(2)}</span>`;
+    //totalElementos.innerHTML = totalGastos.toFixed(2); //Cantidad de decimales que queremos que aparezcan
     limpiar();
 }
 
